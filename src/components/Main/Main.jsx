@@ -1,13 +1,21 @@
 import React, { Component } from "react";
+import { Container } from "react-bootstrap";
+import API from "../../utils/API";
 
 class Main extends Component {
-  state = {};
+  state = {
+    results: {},
+  };
   render() {
     return (
       <main>
-        <h2>Search Bar Here</h2>
+        <Container fluid className="text-center">
+          <h2>Search Bar Here</h2>
+        </Container>
 
-        <p>Search result container</p>
+        <Container fluid className="text-center mt-3 border">
+          <p>Search Results Here</p>
+        </Container>
       </main>
     );
   }
