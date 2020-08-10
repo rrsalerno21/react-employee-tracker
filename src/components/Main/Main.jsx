@@ -9,7 +9,7 @@ class Main extends Component {
     this.state = {
       users: [
         {
-          name: { first: "", last: "" },
+          name: { first: "LOADING...", last: "" },
           email: "",
           cell: "",
           picture: { thumbnail: "" },
@@ -22,9 +22,10 @@ class Main extends Component {
     API.getUsers().then((res) => this.setState({ users: res.results }));
   }
 
+  // Add Sorting Method for Name (bubble sort)
+
   render() {
     const { users } = this.state;
-    console.log(users[0].cell);
     return (
       <main>
         <Container fluid className="text-center">
@@ -46,13 +47,16 @@ class Main extends Component {
               <strong>Phone</strong>
             </Col>
           </Row>
-          <EmpRow
-            picture={users[0].picture.thumbnail}
-            fName={users[0].name.first}
-            lName={users[0].name.last}
-            email={users[0].email}
-            phone={users[0].cell}
-          />
+          {users.map((u) => (
+            <EmpRow
+              key={u.cell}
+              picture={u.picture.thumbnail}
+              fName={u.name.first}
+              lName={u.name.last}
+              email={u.email}
+              cell={u.cell}
+            />
+          ))}
         </Container>
       </main>
     );

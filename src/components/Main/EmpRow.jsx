@@ -2,8 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 
 const empRow = (props) => {
-  const { picture, fName, lName, email, phone } = props;
-  console.log(picture, fName, lName, email, phone);
+  const { picture, fName, lName, email, cell } = props;
   return (
     <React.Fragment>
       <Row className="border-bottom">
@@ -19,7 +18,7 @@ const empRow = (props) => {
           <p>{email}</p>
         </Col>
         <Col xs lg="3">
-          <p>{phone}</p>
+          <p>{cell}</p>
         </Col>
       </Row>
     </React.Fragment>
