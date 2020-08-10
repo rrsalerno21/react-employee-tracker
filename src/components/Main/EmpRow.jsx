@@ -9,12 +9,12 @@ const empRow = (props) => {
         <Col xs lg="2">
           <img src={picture} />
         </Col>
-        <Col xs lg="4">
+        <Col xs lg="3">
           <p>
             {fName} {lName}
           </p>
         </Col>
-        <Col xs lg="3">
+        <Col xs lg="4">
           <p>{email}</p>
         </Col>
         <Col xs lg="3">

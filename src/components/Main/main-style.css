@@ -1,0 +1,7 @@
+#sort-title {
+  cursor: pointer;
+}
+
+#sort-title:hover {
+  text-decoration: underline;
+}
