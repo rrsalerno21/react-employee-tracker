@@ -2,20 +2,24 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 
 const empRow = (props) => {
+  const { picture, fName, lName, email, phone } = props;
+  console.log(picture, fName, lName, email, phone);
   return (
     <React.Fragment>
       <Row className="border-bottom">
         <Col xs lg="2">
-          <p>Picture</p>
+          <img src={picture} />
         </Col>
         <Col xs lg="4">
-          <p>Rocky Salerno</p>
+          <p>
+            {fName} {lName}
+          </p>
         </Col>
         <Col xs lg="3">
-          <p>rrsalerno21@gmail.com</p>
+          <p>{email}</p>
         </Col>
         <Col xs lg="3">
-          <p>(888) 888-8888)</p>
+          <p>{phone}</p>
         </Col>
       </Row>
     </React.Fragment>

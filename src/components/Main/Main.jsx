@@ -4,10 +4,27 @@ import EmpRow from "./EmpRow";
 import API from "../../utils/API";
 
 class Main extends Component {
-  state = {
-    results: {},
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          name: { first: "", last: "" },
+          email: "",
+          cell: "",
+          picture: { thumbnail: "" },
+        },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    API.getUsers().then((res) => this.setState({ users: res.results }));
+  }
+
   render() {
+    const { users } = this.state;
+    console.log(users[0].cell);
     return (
       <main>
         <Container fluid className="text-center">
@@ -29,9 +46,13 @@ class Main extends Component {
               <strong>Phone</strong>
             </Col>
           </Row>
-          <EmpRow />
-          <EmpRow />
-          <EmpRow />
+          <EmpRow
+            picture={users[0].picture.thumbnail}
+            fName={users[0].name.first}
+            lName={users[0].name.last}
+            email={users[0].email}
+            phone={users[0].cell}
+          />
         </Container>
       </main>
     );
