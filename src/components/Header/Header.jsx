@@ -1,9 +1,15 @@
 import React from "react";
+import { Jumbotron, Container } from "react-bootstrap";
+import "./style-header.css";
 
 const Header = () => {
   return (
     <header>
-      <h1>Let's Go</h1>
+      <Jumbotron fluid className="py-3 header-background">
+        <Container className="text-center">
+          <h1>Employee Tracker</h1>
+        </Container>
+      </Jumbotron>
     </header>
   );
 };
