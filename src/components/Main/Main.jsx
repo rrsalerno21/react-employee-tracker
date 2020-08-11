@@ -8,26 +8,20 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [
-        {
-          name: { first: "LOADING...", last: "" },
-          email: "",
-          cell: "",
-          picture: { thumbnail: "" },
-        },
-      ],
+      users: [],
       currentSort: "a-z",
+      query: "",
+      queryResults: [],
     };
   }
 
   componentDidMount() {
     API.getUsers().then((res) => {
       const sortedUsers = this.sortByName(res.results, "a-z");
-      this.setState({ users: sortedUsers });
+      this.setState({ users: sortedUsers, queryResults: sortedUsers });
     });
   }
 
-  // Add Sorting Method for Name (bubble sort)
   sortByName(users, type) {
     let done = false;
 
@@ -57,40 +51,61 @@ class Main extends Component {
 
   handleSort = () => {
     if (this.state.currentSort === "a-z") {
-      let lowHighSort = this.sortByName(this.state.users, "z-a");
-      this.setState({ users: lowHighSort, currentSort: "z-a" });
+      let lowHighSort = this.sortByName(this.state.queryResults, "z-a");
+      this.setState({ queryResults: lowHighSort, currentSort: "z-a" });
     } else if (this.state.currentSort === "z-a") {
-      let highLowSort = this.sortByName(this.state.users, "a-z");
-      this.setState({ users: highLowSort, currentSort: "a-z" });
+      let highLowSort = this.sortByName(this.state.queryResults, "a-z");
+      this.setState({ queryResults: highLowSort, currentSort: "a-z" });
     }
   };
 
+  handleQuery = (event) => {
+    const query = event.target.value;
+    const curUsers = [...this.state.users];
+    const filtUsers = curUsers.filter((u) => {
+      if (
+        u.name.first.includes(query) ||
+        u.name.last.includes(query) ||
+        u.email.includes(query) ||
+        u.cell.includes(query)
+      ) {
+        return u;
+      }
+    });
+
+    this.setState({ query, queryResults: filtUsers });
+  };
+
   render() {
-    const { users } = this.state;
+    const { queryResults } = this.state;
     return (
       <main>
         <Container fluid className="text-center">
-          <input type="text" placeholder="Search Employees" />
+          <input
+            type="text"
+            placeholder="Search Employees"
+            onChange={this.handleQuery}
+          />
         </Container>
 
-        <Container className="mt-3 border">
+        <Container fluid="lg" className="mt-3 border">
           <Row className="border-bottom">
-            <Col xs lg="2">
+            <Col xs md="2">
               <strong>Picture</strong>
             </Col>
-            <Col xs lg="3">
+            <Col xs md="3">
               <strong onClick={this.handleSort} id="sort-title">
                 Name <em>({this.state.currentSort})</em>
               </strong>
             </Col>
-            <Col xs lg="4">
+            <Col xs md="4">
               <strong>Email</strong>
             </Col>
-            <Col xs lg="3">
+            <Col xs md="3">
               <strong>Phone</strong>
             </Col>
           </Row>
-          {users.map((u) => (
+          {queryResults.map((u) => (
             <EmpRow
               key={u.cell}
               picture={u.picture.thumbnail}

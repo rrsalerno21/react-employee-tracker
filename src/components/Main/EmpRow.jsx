@@ -6,19 +6,19 @@ const empRow = (props) => {
   return (
     <React.Fragment>
       <Row className="border-bottom">
-        <Col xs lg="2">
+        <Col md lg="2">
           <img src={picture} />
         </Col>
-        <Col xs lg="3">
-          <p>
+        <Col md lg="3" className="my-1">
+          <span>
             {fName} {lName}
-          </p>
+          </span>
         </Col>
-        <Col xs lg="4">
-          <p>{email}</p>
+        <Col md lg="4" className="my-1">
+          <span>{email}</span>
         </Col>
-        <Col xs lg="3">
-          <p>{cell}</p>
+        <Col md lg="3" className="my-1">
+          <span>{cell}</span>
         </Col>
       </Row>
     </React.Fragment>
